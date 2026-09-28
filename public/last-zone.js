@@ -45,6 +45,7 @@
     // Strip any Arabic characters
     var AR = /[\u0600-\u06FF\u0750-\u077F\uFB50-\uFDFF\uFE70-\uFEFF]+/g;
     var w2 = document.createTreeWalker(root, NodeFilter.SHOW_TEXT), m;
+    if (document.documentElement.getAttribute("lang") !== "ar")
     while ((m = w2.nextNode())) { if (AR.test(m.nodeValue)) { AR.lastIndex = 0; m.nodeValue = m.nodeValue.replace(AR, "").replace(/\s{2,}/g, " "); } AR.lastIndex = 0; }
     // Nav/menu items by label
     document.querySelectorAll("a,button").forEach(function (el) {
