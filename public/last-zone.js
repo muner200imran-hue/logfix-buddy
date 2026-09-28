@@ -51,6 +51,11 @@
       var t = (el.textContent || "").trim();
       if (/^(My License|Reseller|WhatsApp)$/i.test(t)) hide(el);
     });
+    // Remove legacy payment details and heading everywhere they appear.
+    document.querySelectorAll("body *").forEach(function (el) {
+      var text = (el.textContent || "").replace(/\s+/g, " ").trim();
+      if (/^(01626900766|\*?\s*Send money from personal bKash only|Pay the way you like)$/i.test(text)) hide(el);
+    });
     // Remove testimonials section
     document.querySelectorAll("h2").forEach(function (h) {
       if (/Loved by Real Users/i.test(h.textContent)) hide(h.closest("section") || h.parentElement);
