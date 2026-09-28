@@ -112,7 +112,7 @@
     var root = document.querySelector("body > div") || document.body;
     var parts = [].slice.call(root.querySelectorAll("header, header > div > *, section > div > *, section > *")).filter(function (el) {
       var r = el.getBoundingClientRect(); return r.bottom > 0 && r.top < innerHeight * 1.5 && r.width > 20;
-    }).slice(0, 40);
+    }).slice(0, 40); window.__lzp = parts.length;
     parts.forEach(function (el) {
       var x = (Math.random() - .5) * innerWidth, y = (Math.random() - .5) * innerHeight, a = (Math.random() - .5) * 90;
       el.style.transition = "none";
