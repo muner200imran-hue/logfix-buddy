@@ -3,7 +3,7 @@
   var CHANNEL = "https://t.me/+Dm8IppPh39s4YWIx";
   var SUPPORT = "https://t.me/monir_i0_0i";
   var BOT = "https://t.me/LZ_LOV_BOT";
-  var NAME_RE = /Lovable Zone|LOVABLE ZONE|Lovable zone/g;
+  var NAME_RE = /Lovable Zone|LOVABLE ZONE|Lovable zone|لاست زون/g;
 
   function hide(el) { if (el && el.style.display !== "none") el.style.setProperty("display", "none", "important"); }
 
@@ -15,7 +15,7 @@
     while ((n = w.nextNode())) {
       if (NAME_RE.test(n.nodeValue)) {
         NAME_RE.lastIndex = 0;
-        n.nodeValue = n.nodeValue.replace(NAME_RE, NAME);
+        if (n.nodeValue.indexOf(NAME) < 0) n.nodeValue = n.nodeValue.replace(NAME_RE, NAME);
         var p = n.parentElement;
         if (p) { p.style.setProperty("color", "#ffffff", "important"); p.style.setProperty("background", "none", "important"); p.style.setProperty("-webkit-text-fill-color", "#ffffff", "important"); }
       }
