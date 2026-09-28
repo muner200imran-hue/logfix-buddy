@@ -45,8 +45,12 @@
     // Strip any Arabic characters
     var AR = /[\u0600-\u06FF\u0750-\u077F\uFB50-\uFDFF\uFE70-\uFEFF]+/g;
     var w2 = document.createTreeWalker(root, NodeFilter.SHOW_TEXT), m;
-    if (document.documentElement.getAttribute("lang") !== "ar")
-    while ((m = w2.nextNode())) { if (AR.test(m.nodeValue)) { AR.lastIndex = 0; m.nodeValue = m.nodeValue.replace(AR, "").replace(/\s{2,}/g, " "); } AR.lastIndex = 0; }
+    while ((m = w2.nextNode())) { if (m.parentElement && m.parentElement.closest('[lang="ar"]')) continue; if (AR.test(m.nodeValue)) { AR.lastIndex = 0; m.nodeValue = m.nodeValue.replace(AR, "").replace(/\s{2,}/g, " "); } AR.lastIndex = 0; }
+    // Add Guides link to header nav and footer once
+    var nav = document.querySelector("header nav");
+    if (nav && !nav.querySelector('a[href="/guides.html"]')) { var g = document.createElement("a"); g.href = "/guides.html"; g.textContent = "Guides"; g.className = (nav.querySelector("a") || {}).className || ""; nav.appendChild(g); }
+    var ful = document.querySelector("footer ul");
+    if (ful && !ful.querySelector('a[href="/guides.html"]')) { var li = document.createElement("li"); var fa = document.createElement("a"); fa.href = "/guides.html"; fa.textContent = "Guides & Comparisons"; var ref = ful.querySelector("a"); if (ref) fa.className = ref.className; li.appendChild(fa); ful.appendChild(li); }
     // Nav/menu items by label
     document.querySelectorAll("a,button").forEach(function (el) {
       var t = (el.textContent || "").trim();
