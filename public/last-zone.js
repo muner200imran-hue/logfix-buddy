@@ -1,9 +1,9 @@
 (function () {
-  var NAME = "لاست زون";
+  var NAME = "LAST ZONE";
   var CHANNEL = "https://t.me/+Dm8IppPh39s4YWIx";
   var SUPPORT = "https://t.me/monir_i0_0i";
   var BOT = "https://t.me/LZ_LOV_BOT";
-  var NAME_RE = /Lovable Zone|LOVABLE ZONE|Lovable zone|لاست زون/g;
+  var NAME_RE = /Lovable Zone|LOVABLE ZONE|Lovable zone|LovableZone|\u0644\u0627\u0633\u062a \u0632\u0648\u0646/g;
 
   function hide(el) { if (el && el.style.display !== "none") el.style.setProperty("display", "none", "important"); }
 
@@ -33,9 +33,13 @@
         return;
       }
       if (/t\.me\//.test(h) && h !== CHANNEL && h !== SUPPORT && h !== BOT) {
-        a.setAttribute("href", /support|دعم/i.test(a.textContent) ? SUPPORT : CHANNEL);
+        a.setAttribute("href", /support/i.test(a.textContent) ? SUPPORT : CHANNEL);
       }
     });
+    // Strip any Arabic characters
+    var AR = /[\u0600-\u06FF\u0750-\u077F\uFB50-\uFDFF\uFE70-\uFEFF]+/g;
+    var w2 = document.createTreeWalker(root, NodeFilter.SHOW_TEXT), m;
+    while ((m = w2.nextNode())) { if (AR.test(m.nodeValue)) { AR.lastIndex = 0; m.nodeValue = m.nodeValue.replace(AR, "").replace(/\s{2,}/g, " "); } AR.lastIndex = 0; }
     // Nav/menu items by label
     document.querySelectorAll("a,button").forEach(function (el) {
       var t = (el.textContent || "").trim();
