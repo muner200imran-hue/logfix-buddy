@@ -79,7 +79,9 @@
   document.addEventListener("click", function (e) {
     var t = e.target.closest && e.target.closest("a,button");
     if (!t) return;
-    var pk = t.closest("#packages");
+    var txt = (t.textContent || "").trim();
+    var pk = t.closest("#packages") || /^(Buy now|Get started|Order now|Buy)/i.test(txt) ||
+      (t.closest("[role=dialog],section,div") && /Lifetime plan|Premium access/i.test(t.parentElement ? t.parentElement.textContent : ""));
     if (pk) { e.preventDefault(); e.stopPropagation(); window.open(BOT, "_blank", "noopener"); }
   }, true);
 
