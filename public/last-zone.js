@@ -110,10 +110,13 @@
   setTimeout(function () { glass(); d.style.transition = "opacity .2s"; d.style.opacity = "0"; setTimeout(function () { d.remove(); }, 200); }, 2600);
   function glass() {
     var root = document.querySelector("body > div") || document.body;
-    var s = document.createElement("style");
-    s.textContent = "@keyframes lzshake{0%,100%{transform:none}10%{transform:translate(-18px,8px) rotate(-1.5deg)}20%{transform:translate(16px,-10px) rotate(1.5deg)}30%{transform:translate(-14px,12px) rotate(-1deg)}40%{transform:translate(14px,-6px) rotate(1deg)}50%{transform:translate(-10px,8px) rotate(-.8deg)}60%{transform:translate(10px,-8px) rotate(.8deg)}70%{transform:translate(-7px,5px)}80%{transform:translate(6px,-4px)}90%{transform:translate(-3px,2px)}}.lz-shake{animation:lzshake 1s cubic-bezier(.36,.07,.19,.97) both}";
-    document.head.appendChild(s);
-    root.classList.add("lz-shake");
-    setTimeout(function () { root.classList.remove("lz-shake"); }, 1050);
+    root.style.transition = "none";
+    root.style.filter = "blur(18px)";
+    root.offsetHeight;
+    requestAnimationFrame(function () {
+      root.style.transition = "filter 1.5s ease-out";
+      root.style.filter = "";
+      setTimeout(function () { root.style.transition = ""; }, 1600);
+    });
   }
 })();
