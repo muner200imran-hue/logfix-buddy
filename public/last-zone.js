@@ -63,6 +63,7 @@
         if (s) hide(s); else { var p = el; for (var k = 0; k < 3 && p.parentElement; k++) p = p.parentElement; hide(p); }
       }
     });
+    hide(document.getElementById("payment-methods"));
     document.querySelectorAll("h2").forEach(function (h) {
       if (/Loved by Real Users/i.test(h.textContent)) hide(h.closest("section") || h.parentElement);
     });
