@@ -93,3 +93,10 @@
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start); else start();
 })();
+
+// Keep top bar fixed while scrolling (overflow hidden breaks sticky)
+(function () {
+  var s = document.createElement("style");
+  s.textContent = ".overflow-x-hidden{overflow-x:clip!important}html,body{overflow-x:clip}header{position:sticky!important;top:0!important;z-index:50!important}";
+  (document.head || document.documentElement).appendChild(s);
+})();
