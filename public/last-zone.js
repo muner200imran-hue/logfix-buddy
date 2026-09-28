@@ -109,21 +109,24 @@
   document.body.appendChild(d);
   setTimeout(function () { glass(); d.style.opacity = "0"; setTimeout(function () { d.remove(); }, 500); }, 2600);
   function glass() {
-    var W = innerWidth, H = innerHeight, C = 8, R = 6, g = document.createElement("div");
-    g.id = "lz-glass";
-    var css = '<style>#lz-glass{position:fixed;inset:0;z-index:99998;pointer-events:none;overflow:hidden}#lz-glass b{position:absolute;background:linear-gradient(135deg,rgba(139,92,246,.18),rgba(34,211,238,.08));border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:inset 0 0 20px rgba(255,255,255,.06);transition:transform 1s cubic-bezier(.6,-0.2,.7,1),opacity 1s}</style>';
-    var h = "";
-    for (var r = 0; r < R; r++) for (var c = 0; c < C; c++) h += '<b style="left:' + (c * W / C) + 'px;top:' + (r * H / R) + 'px;width:' + (W / C + 1) + 'px;height:' + (H / R + 1) + 'px"></b>';
-    g.innerHTML = css + h;
-    document.body.appendChild(g);
-    setTimeout(function () {
-      [].forEach.call(g.querySelectorAll("b"), function (b) {
-        var x = (Math.random() - .5) * W * 1.4, y = (Math.random() - .3) * H * 1.4, a = (Math.random() - .5) * 540;
-        b.style.transitionDelay = (Math.random() * .35) + "s";
-        b.style.transform = "translate(" + x + "px," + y + "px) rotate(" + a + "deg) scale(.3)";
-        b.style.opacity = "0";
+    var root = document.querySelector("body > div") || document.body;
+    var parts = [].slice.call(root.querySelectorAll("header, header > div > *, section > div > *, section > *")).filter(function (el) {
+      var r = el.getBoundingClientRect(); return r.bottom > 0 && r.top < innerHeight * 1.5 && r.width > 20;
+    }).slice(0, 40);
+    parts.forEach(function (el) {
+      var x = (Math.random() - .5) * innerWidth, y = (Math.random() - .5) * innerHeight, a = (Math.random() - .5) * 90;
+      el.style.transition = "none";
+      el.style.transform = "translate(" + x + "px," + y + "px) rotate(" + a + "deg) scale(.6)";
+      el.style.opacity = "0";
+      el.style.filter = "blur(6px)";
+    });
+    root.offsetHeight;
+    requestAnimationFrame(function () {
+      parts.forEach(function (el) {
+        el.style.transition = "transform 1.1s cubic-bezier(.2,1.1,.3,1) " + (Math.random() * .4) + "s, opacity .8s, filter 1s";
+        el.style.transform = ""; el.style.opacity = ""; el.style.filter = "";
       });
-      setTimeout(function () { g.remove(); }, 1600);
-    }, 700);
+      setTimeout(function () { parts.forEach(function (el) { el.style.transition = ""; }); }, 1800);
+    });
   }
 })();
