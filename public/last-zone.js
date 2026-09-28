@@ -110,23 +110,10 @@
   setTimeout(function () { glass(); d.style.transition = "opacity .2s"; d.style.opacity = "0"; setTimeout(function () { d.remove(); }, 200); }, 2600);
   function glass() {
     var root = document.querySelector("body > div") || document.body;
-    var parts = [].slice.call(root.querySelectorAll("header, header > div > *, section > div > *, section > *")).filter(function (el) {
-      var r = el.getBoundingClientRect(); return r.bottom > 0 && r.top < innerHeight * 1.5 && r.width > 20;
-    }).slice(0, 40);
-    parts.forEach(function (el) {
-      var x = (Math.random() - .5) * innerWidth, y = (Math.random() - .5) * innerHeight, a = (Math.random() - .5) * 90;
-      el.style.transition = "none";
-      el.style.transform = "translate(" + x + "px," + y + "px) rotate(" + a + "deg) scale(.6)";
-      el.style.opacity = "0";
-      el.style.filter = "blur(6px)";
-    });
-    root.offsetHeight;
-    requestAnimationFrame(function () {
-      parts.forEach(function (el) {
-        el.style.transition = "transform 1.6s cubic-bezier(.2,1.1,.3,1) " + (Math.random() * .5) + "s, opacity 1s, filter 1.4s";
-        el.style.transform = ""; el.style.opacity = ""; el.style.filter = "";
-      });
-      setTimeout(function () { parts.forEach(function (el) { el.style.transition = ""; }); }, 2400);
-    });
+    var s = document.createElement("style");
+    s.textContent = "@keyframes lzshake{0%,100%{transform:none}10%{transform:translate(-18px,8px) rotate(-1.5deg)}20%{transform:translate(16px,-10px) rotate(1.5deg)}30%{transform:translate(-14px,12px) rotate(-1deg)}40%{transform:translate(14px,-6px) rotate(1deg)}50%{transform:translate(-10px,8px) rotate(-.8deg)}60%{transform:translate(10px,-8px) rotate(.8deg)}70%{transform:translate(-7px,5px)}80%{transform:translate(6px,-4px)}90%{transform:translate(-3px,2px)}}.lz-shake{animation:lzshake 1s cubic-bezier(.36,.07,.19,.97) both}";
+    document.head.appendChild(s);
+    root.classList.add("lz-shake");
+    setTimeout(function () { root.classList.remove("lz-shake"); }, 1050);
   }
 })();
