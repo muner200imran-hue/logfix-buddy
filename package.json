@@ -1,0 +1,13 @@
+{
+  "name": "zone-static-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0 --port 8080",
+    "build": "vite build",
+    "build:dev": "vite build --mode development"
+  },
+  "devDependencies": {
+    "vite": "^8.1.5"
+  }
+}
