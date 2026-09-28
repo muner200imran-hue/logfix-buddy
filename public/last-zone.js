@@ -57,6 +57,12 @@
       if (/^(01626900766|\*?\s*Send money from personal bKash only|Pay the way you like)$/i.test(text)) hide(el);
     });
     // Remove testimonials section
+    document.querySelectorAll("body *").forEach(function (el) {
+      if (el.children.length === 0 && /Local taka or international/i.test(el.textContent)) {
+        var s = el.closest("section");
+        if (s) hide(s); else { var p = el; for (var k = 0; k < 3 && p.parentElement; k++) p = p.parentElement; hide(p); }
+      }
+    });
     document.querySelectorAll("h2").forEach(function (h) {
       if (/Loved by Real Users/i.test(h.textContent)) hide(h.closest("section") || h.parentElement);
     });
