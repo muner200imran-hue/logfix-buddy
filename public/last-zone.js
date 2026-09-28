@@ -101,9 +101,8 @@
   (document.head || document.documentElement).appendChild(s);
 })();
 
-// Splash logo for 3 seconds (once per visit)
+// Splash logo for 3 seconds (every page load)
 (function () {
-  try { if (sessionStorage.getItem("lz-splash")) return; sessionStorage.setItem("lz-splash", "1"); } catch (e) {}
   var d = document.createElement("div");
   d.id = "lz-splash";
   d.innerHTML = '<style>#lz-splash{position:fixed;inset:0;z-index:99999;background:#07070d;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;transition:opacity .5s}#lz-splash img{width:56px;height:56px;object-fit:contain;filter:drop-shadow(0 0 12px rgba(139,92,246,.35));animation:lzp 1.5s ease-in-out infinite}#lz-splash span{color:#fff;font:700 15px Inter,sans-serif;letter-spacing:.35em}@keyframes lzp{50%{transform:scale(1.04)}}</style><img src="/images/lovable-zone-logo-v2.png" alt="LAST ZONE"><span>LAST ZONE</span>';
