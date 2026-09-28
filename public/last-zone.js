@@ -5,6 +5,12 @@
   var BOT = "https://t.me/LZ_LOV_BOT";
   var NAME_RE = /Lovable Zone|LOVABLE ZONE|Lovable zone|LovableZone|\u0644\u0627\u0633\u062a \u0632\u0648\u0646/g;
 
+  var st=document.createElement("style");st.textContent=
+  'img[src*="lovable-zone-logo"]{background:transparent!important;padding:0!important;border-radius:0!important;object-fit:contain!important;filter:drop-shadow(0 0 10px rgba(236,72,153,.45)) drop-shadow(0 0 18px rgba(99,102,241,.3));}'+
+  'header img[src*="lovable-zone-logo"],nav img[src*="lovable-zone-logo"]{width:40px!important;height:40px!important;}'+
+  'a:has(>img[src*="lovable-zone-logo"]){gap:12px!important;align-items:center!important;}'+
+  'a:has(>img[src*="lovable-zone-logo"]) span{font-weight:800!important;letter-spacing:.14em!important;font-size:1.15rem!important;line-height:1!important;}';
+  (document.head||document.documentElement).appendChild(st);
   function hide(el) { if (el && el.style.display !== "none") el.style.setProperty("display", "none", "important"); }
 
   function apply() {
